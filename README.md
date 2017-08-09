@@ -4,7 +4,7 @@
 
   - __Product Owner__: Garima Batra
   - __Scrum Master__: Harvey Multani
-  - __Development Team Members__: Fredy-Esse, Landon Roberts
+  - __Development Team Members__: Fredy Esse, Landon Roberts
 
 ## Table of Contents
 
