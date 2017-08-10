@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 
 //user creation api route
-app.post('/api/user', function(req, res) {
+app.post('/api/users', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
 
@@ -41,7 +41,7 @@ app.post('/api/user', function(req, res) {
     });
 });
 
-//ingredient search api route 
+//ingredient search api route
 app.post('/api/ingredients', function(req, res) {
 	var ingredient = req.body.ingredient;
 
@@ -55,7 +55,7 @@ app.post('/api/ingredients', function(req, res) {
 	  	} else {
 	  		console.log(`error ${ingredient} not found`);
 	  		res.send(`${ingredient} not in database`);
-	  	}	
+	  	}
 	  })
 
 })
