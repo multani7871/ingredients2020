@@ -13,6 +13,33 @@ app.use(express.static(path.join(__dirname, 'build')));
 //   res.sendFile(path.join(__dirname + '/build/index.html'));
 // });
 
+
+//user creation api route
+app.post('/api/user', function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+
+  User.findOne({username: username})
+    .exec(function(err, user) {
+      if (!user) {
+        var newUser = new User({
+          username: username,
+          password: password
+        });
+        newUser.save(function(err, newUser) {
+          if (err) { res.status(500).send(err); }
+          // TODO: create session
+          console.log(`${username} created`);
+          res.send(`${username} created`);
+        });
+      } else {
+        console.log(`${username} exists`);
+        res.send(`${username} already exists`);
+        // TODO: redirect back to the signup page
+      }
+    });
+});
+
 var port = process.env.PORT || 8000;
 
 app.listen(port, function() {
