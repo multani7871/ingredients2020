@@ -7,6 +7,9 @@
   - test/...
   - doc/...
   - refactor/...
+  
+  for example: 'git checkout -b test/newTest'
+  
 1. Switch to your branch (in terminal or in editor)
 1. Do a 'git pull --rebase upstream master' in your feature branch
 1. Make commits to your feature branch
