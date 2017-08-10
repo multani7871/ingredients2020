@@ -47,6 +47,9 @@
 1. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
 
 ## Detailed Workflow
+1. To see live updates with React's development server use "npm start"
+2. To see it hosted on Express server, run "npm run build" or "postinstall" and it will minify all the build.
+3. Run on localhost:8000 to see full-stack changes!
 
 ### Fork the repo
 
