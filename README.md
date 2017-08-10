@@ -1,5 +1,7 @@
 # ingredients2020
 
+[![CircleCI](https://circleci.com/gh/mariasratbags/ingredients2020.svg?style=svg)](https://circleci.com/gh/mariasratbags/ingredients2020)
+
 ## Team
 
   - __Product Owner__: Garima Batra
