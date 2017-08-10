@@ -30,8 +30,6 @@ jobs:
           name: update-npm
           command: 'sudo npm install'
 
-      - run: npm run build
-
       - save_cache:
           paths:
             - node_modules
