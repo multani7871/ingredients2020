@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var db = require('./db/config.js');
 var User = require('./db/models/users.js');
+var Ingredient = require('./db/models/ingredients.js');
 
 var app = express();
 app.use(bodyParser.json());
@@ -39,6 +40,25 @@ app.post('/api/user', function(req, res) {
       }
     });
 });
+
+//ingredient search api route 
+app.post('/api/ingredients', function(req, res) {
+	var ingredient = req.body.ingredient;
+
+	Ingredient.findOne({name: ingredient})
+	  .exec(function(err, ingredientName) {
+	  	//if there is an ingredient, return the document JSON, on the front end, we can extrapolate the name and link!
+	  	if(ingredientName) {
+	  		console.log(`${ingredient} found`);
+	  		res.json(ingredientName);
+	  		res.end();
+	  	} else {
+	  		console.log(`error ${ingredient} not found`);
+	  		res.send(`${ingredient} not in database`);
+	  	}	
+	  })
+
+})
 
 var port = process.env.PORT || 8000;
 

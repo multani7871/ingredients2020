@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 
 var ingredientsSchema = mongoose.Schema({
-  ingredient: { type: String, required: true },
-  links: { type: String, required: true }
-});
+  name: { type: String, required: true },
+  link: { type: String, required: true }
+}, {collection: 'Ingredients'});
 
 var Ingredient = mongoose.model('Ingredient', ingredientsSchema);
 
