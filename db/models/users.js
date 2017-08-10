@@ -18,6 +18,15 @@ userSchema.methods.comparePassword = function(candidatePassword, savedPassword, 
   });
 };
 
-//should create a hash and salt it with bcrypt
+userSchema.pre('save', function(next) {
+  var cipher = Promise.promisify(bcrypt.hash);
+  return cipher(this.password, null, null).bind(this)
+    .then(function(hash) {
+      this.password = hash;
+      next();
+    });
+});
+
+var User = mongoose.model('User', userSchema);
 
 module.exports = User;
