@@ -7,9 +7,16 @@ var userSchema = mongoose.Schema({
   password: {type: String}
 }, {collection: 'Users'});
 
-var User = mongoose.model('User', userSchema);
+//comparePassword function to come when routing is done
 
-//comparePassword function to come when routing is done 
+// TODO: upgrade to auth0 or add salts
+
+userSchema.methods.comparePassword = function(candidatePassword, savedPassword, cb) {
+  bcrypt.compare(candidatePassword, savedPassword, function(err, isMatch) {
+    if (err) { return cb(err); }
+    cb(null, isMatch);
+  });
+};
 
 //should create a hash and salt it with bcrypt
 
