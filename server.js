@@ -16,10 +16,11 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 
 //user creation api route
-app.post('/api/users', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-
+app.post('/api/user', function(req, res) {
+  var username = req.body.data.username;
+  console.log('line 21', req.body);
+  var password = req.body.data.password;
+  console.log()
   User.findOne({username: username})
     .exec(function(err, user) {
       if (!user) {
@@ -28,7 +29,7 @@ app.post('/api/users', function(req, res) {
           password: password
         });
         newUser.save(function(err, newUser) {
-          if (err) { res.status(500).send(err); }
+          if (err) { res.status(500).send('this is an error'); }
           // TODO: create session
           console.log(`${username} created`);
           res.send(`${username} created`);

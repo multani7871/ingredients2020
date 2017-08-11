@@ -1,19 +1,52 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import $ from 'jquery';
 import './App.css';
 
 class Signup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: ''
+    };
+
+    this.handleUsername = this.handleUsername.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
+    this.submitUser = this.submitUser.bind(this);
+  }
+
+  handleUsername(event) {
+    this.setState({
+      username: event.target.value
+    });
+  }
+
+  handlePassword(event) {
+    this.setState({
+      password: event.target.value
+    });
+  }
 
   submitUser(e) {
+    console.log(this.state);
     e.preventDefault();
 
     var data = {
-      username: this.state.email,
+      username: this.state.username,
       password: this.state.password
     }
-
-    $.post('http://localhost:3000/api/user', {
+/*    $.ajax({
+      url: 'http://localhost:3000/api/user',
+      type: 'POST',
       data: data
+    })*/
+
+    $.post('http://localhost:8000/api/user', {
+      data: data
+    })
+    .done((str) => {
+      console.log('line 50', str);
     })
     .fail(function() {
       console.log('Signup failed');
@@ -27,8 +60,8 @@ class Signup extends Component {
           <h2>Welcome to Ingredients 20/20</h2>
         </div>
         <form onSubmit={this.submitUser} >
-          <input type="email" value={this.state.email} />
-          <input type="password" value={this.state.password} />
+          <input type="text" value={this.state.username} onChange={this.handleUsername} />
+          <input type="password" value={this.state.password} onChange={this.handlePassword}/>
           <input type="submit" value="Submit"/>
         </form>
       </div>
