@@ -73,18 +73,15 @@ app.post('/api/login', function(req, res) {
 
 //ingredient search api route
 app.post('/api/ingredients', function(req, res) {
-  var ingredient = req.body.ingredient;
+  var ingredient = req.body.data.ingredient;
 
   Ingredient.findOne({name: ingredient})
     .exec(function(err, ingredientName) {
       //if there is an ingredient, return the document JSON, on the front end, we can extrapolate the name and link!
-      if (ingredientName) {
-        console.log(`${ingredient} found`);
-        res.json(ingredientName);
-        res.end();
+      if (!ingredientName) {
+        res.status(200).send(`${ingredient} not in database`);
       } else {
-        console.log(`error ${ingredient} not found`);
-        res.send(`${ingredient} not in database`);
+        res.json(ingredientName);
       }
     });
 
