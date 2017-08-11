@@ -42,7 +42,7 @@ class Signup extends Component {
       data: data
     })*/
 
-    $.post('http://localhost:8000/api/user', {
+    $.post('https://localhost:8000/api/user', {
       data: data
     })
     .done((str) => {
