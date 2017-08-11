@@ -42,7 +42,7 @@ class Signup extends Component {
       data: data
     })*/
 
-    $.post('/api/users', {
+    $.post('/api/signup', {
       data: data
     })
     .done((str) => {
