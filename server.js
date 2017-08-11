@@ -7,7 +7,7 @@ var Ingredient = require('./db/models/ingredients.js');
 
 var app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'build')));
 
 // app.get('/', function(req, res) {
@@ -18,9 +18,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 //user creation api route
 app.post('/api/signup', function(req, res) {
   var username = req.body.data.username;
-  console.log('line 21', req.body);
   var password = req.body.data.password;
-  console.log()
+
   User.findOne({username: username})
     .exec(function(err, user) {
       if (!user) {
@@ -42,24 +41,49 @@ app.post('/api/signup', function(req, res) {
     });
 });
 
+//login route
+app.post('/api/login', function(req, res) {
+  var username = req.body.data.username;
+  var password = req.body.data.password;
+
+  User.findOne({username: username})
+    .exec(function(err, user) {
+      if (!user) {
+        console.log('user does not exist, signup please');
+        res.redirect('/signup');
+      } else {
+        user.comparePassword(password, user.password, function(err, match) {
+          if (match) {
+            // TODO: take them to dashboard?
+            console.log('success', username);
+            res.redirect('/dashboard');
+          } else {
+            console.log('incorrect password');
+            res.redirect('/login');
+          }
+        });
+      }
+    });
+});
+
 //ingredient search api route
 app.post('/api/ingredients', function(req, res) {
-	var ingredient = req.body.ingredient;
+  var ingredient = req.body.ingredient;
 
-	Ingredient.findOne({name: ingredient})
-	  .exec(function(err, ingredientName) {
-	  	//if there is an ingredient, return the document JSON, on the front end, we can extrapolate the name and link!
-	  	if(ingredientName) {
-	  		console.log(`${ingredient} found`);
-	  		res.json(ingredientName);
-	  		res.end();
-	  	} else {
-	  		console.log(`error ${ingredient} not found`);
-	  		res.send(`${ingredient} not in database`);
-	  	}
-	  })
+  Ingredient.findOne({name: ingredient})
+    .exec(function(err, ingredientName) {
+      //if there is an ingredient, return the document JSON, on the front end, we can extrapolate the name and link!
+      if (ingredientName) {
+        console.log(`${ingredient} found`);
+        res.json(ingredientName);
+        res.end();
+      } else {
+        console.log(`error ${ingredient} not found`);
+        res.send(`${ingredient} not in database`);
+      }
+    });
 
-})
+});
 
 var port = process.env.PORT || 8000;
 
