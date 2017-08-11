@@ -36,7 +36,7 @@ app.post('/api/signup', function(req, res) {
         });
       } else {
         console.log(`${username} exists`);
-        res.send(`${username} already exists`);
+        res.redirect('/dashboard');
         // TODO: redirect back to the signup page
       }
     });
