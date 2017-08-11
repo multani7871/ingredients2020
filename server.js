@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 
 //user creation api route
-app.post('/api/user', function(req, res) {
+app.post('/api/users', function(req, res) {
   var username = req.body.data.username;
   console.log('line 21', req.body);
   var password = req.body.data.password;
