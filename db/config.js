@@ -6,8 +6,10 @@ var mongoUsername = process.env.MONGO_USERNAME;
 var mongoPassword = process.env.MONGO_PASSWORD;
 
 var mongoURI = `mongodb://${mongoUsername}:${mongoPassword}@${mongoServer}`;
-
-mongoose.connect(mongoURI);
+mongoose.Promise = global.Promise;
+mongoose.connect(mongoURI,  {
+  useMongoClient: true
+});
 
 var db = mongoose.connection;
 
