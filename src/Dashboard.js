@@ -62,7 +62,7 @@ class Dashboard extends Component {
           <input type="submit" value="Submit"/>
         </form>
         {this.state && this.state.elLink ?
-          <div>{this.state.searchRes + ' - '}
+          <div>{this.state.searchRes + ' found in database! - '}
             <a href={this.state.elLink} target="_blank">{this.state.elLink}</a>
           </div> :
           <div>{this.state.searchRes}</div>
