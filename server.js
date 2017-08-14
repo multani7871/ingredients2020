@@ -10,11 +10,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'build')));
 
-// app.get('/', function(req, res) {
-//   res.sendFile(path.join(__dirname + '/build/index.html'));
-// });
-
-
 //user creation api route
 app.post('/api/signup', function(req, res) {
   var username = req.body.data.username;
@@ -34,9 +29,9 @@ app.post('/api/signup', function(req, res) {
           res.send(`${username} created`);
         });
       } else {
-        console.log(`${username} exists`);
+        console.log(`username exists`);
         //res.redirect('/dashboard');
-        res.end();
+        res.status(401).send(`username exists`);
         // TODO: redirect back to the signup page
       }
     });
