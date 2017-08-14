@@ -75,7 +75,7 @@ app.post('/api/ingredients', function(req, res) {
     .exec(function(err, ingredientName) {
       //if there is an ingredient, return the document JSON, on the front end, we can extrapolate the name and link!
       if (!ingredientName) {
-        res.status(200).send(`${ingredient} not in database`);
+        res.status(401).send(`${ingredient} not in database`);
       } else {
         res.json(ingredientName);
       }

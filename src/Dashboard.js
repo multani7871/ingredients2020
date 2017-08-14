@@ -6,16 +6,26 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: ''
+      search: '',
+      searchRes: '',
+      elLink: ''
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.searchDb = this.searchDb.bind(this);
+    this.renderSearch = this.renderSearch.bind(this);
   }
 
   handleSearch(event) {
     this.setState({
       search: event.target.value
     });
+  }
+
+  renderSearch(searchRes, link) {
+    this.setState({
+      searchRes: searchRes,
+      elLink: link || ''
+    })
   }
 
   searchDb(e) {
@@ -31,7 +41,11 @@ class Dashboard extends Component {
       data: data
     })
     .done((str) => {
-      console.log('received', str)
+      this.renderSearch(str.name, str.link);
+      console.log(str);
+    })
+    .fail((str) => {
+      this.renderSearch(str.responseText);
     })
 
   }
@@ -47,6 +61,13 @@ class Dashboard extends Component {
               onChange={this.handleSearch}/>
           <input type="submit" value="Submit"/>
         </form>
+        {this.state && this.state.elLink ?
+          <div>{this.state.searchRes + ' - '}
+            <a href={this.state.elLink} target="_blank">{this.state.elLink}</a>
+          </div> :
+          <div>{this.state.searchRes}</div>
+
+        }
 
       </div>
     );
