@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< c02f5c6d20420bbed023ee9dfe6e176b601d3c3b
     "auth0-js": "^8.9.1",
+=======
+    "@google-cloud/vision": "^0.12.0",
+>>>>>>> added google cloud
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
