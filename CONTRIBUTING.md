@@ -49,10 +49,10 @@
    new commit.
 1. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
 
-## Detailed Workflow
-1. To see live updates with React's development server use "npm start"
-2. To see it hosted on Express server, run "npm run build" or "postinstall" and it will minify all the build.
-3. Run on localhost:8000 to see full-stack changes!
+## Development Workflow
+1. Open a terminal window alongside your editor and browser
+1. Run 'npm start' window which will load the React dev live server and proxy any requests to the Express backend along with opening a browser window to view the changes
+1. Make changes to the code and save to see live client and server updates.
 
 ### Fork the repo
 
@@ -146,23 +146,6 @@ make sure they work also.
 If rebasing broke anything, fix it, then repeat the above process until
 you get here again and nothing is broken and all the tests pass.
 
-### Make a pull request
-
-Make a clear pull request from your fork and branch to the upstream master
-branch, detailing exactly what changes you made and what feature this
-should add. The clearer your pull request is the faster you can get
-your changes incorporated into this repo.
-
-At least one other person MUST give your changes a code review, and once
-they are satisfied they will merge your changes into upstream. Alternatively,
-they may have some requested changes. You should make more commits to your
-branch to fix these, then follow this process again from rebasing onwards.
-
-Once you get back here, make a comment requesting further review and
-someone will look at your code again. If they like it, it will get merged,
-else, just repeat again.
-
-Thanks for contributing!
 
 ### Guidelines
 
@@ -175,19 +158,4 @@ Thanks for contributing!
    new, testable behavior.
 1. Your pull request is comprised of a single ([squashed][]) commit.
 
-## Checklist:
 
-This is just to help you organize your process
-
-- [ ] Did I cut my work branch off of master (don't cut new branches from existing feature brances)?
-- [ ] Did I follow the correct naming convention for my branch?
-- [ ] Is my branch focused on a single main change?
- - [ ] Do all of my changes directly relate to this change?
-- [ ] Did I rebase the upstream master branch after I finished all my
-  work?
-- [ ] Did I write a clear pull request message detailing what changes I made?
-- [ ] Did I get a code review?
- - [ ] Did I make any requested changes from that code review?
-
-If you follow all of these guidelines and make good changes, you should have
-no problem getting your changes merged in.
