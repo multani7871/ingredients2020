@@ -11,8 +11,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'build')));
 
 //routes
-app.post('/api/signup', handler.signup);
-app.post('/api/login', handler.login);
 app.post('/api/ingredients', handler.ingredients);
 app.post('/api/pastSearches', handler.pastSearches);
 
