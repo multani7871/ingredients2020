@@ -11,11 +11,8 @@ class Dashboard extends Component {
       search: '',
       searchResName: '',
       searchResLink: '',
-<<<<<<< 3f2a175283b87a0cb4bd83a9c44041d53aaf2652
       data_uri: null,
       processing: false,
-=======
->>>>>>> uninstall webcam
       pastSearches: []
     };
 
@@ -65,6 +62,8 @@ class Dashboard extends Component {
   handleFile(e) {
     const reader = new FileReader();
     const file = e.target.files[0];
+    console.log(e);
+    console.log(reader);
 
     reader.onload = (upload) => {
       this.setState({
