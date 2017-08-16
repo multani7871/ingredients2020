@@ -70,9 +70,7 @@ exports.ingredients = function(req, res) {
       if (!ingredientName) {
         res.status(401).send(`${ingredient} not in database`);
       } else {
-        console.log('ingredient name', ingredientName);
-        console.log('ingredient id', ingredientName._id);
-        User.findByIdAndUpdate(userID, {"$push": {"pastSearches": ingredientName._id}})
+        User.findByIdAndUpdate(userID, {"$push": {"pastSearches": ingredientName.name}})
           .exec(function(err, user) {
             if (err) {
               throw err;
