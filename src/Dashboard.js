@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import {bindAll} from 'lodash';
 import $ from 'jquery';
-import { Button } from 'react-bootstrap';
 // import SavedItems from './SavedItems';
 
 class Dashboard extends Component {
@@ -11,17 +11,21 @@ class Dashboard extends Component {
       search: '',
       searchResName: '',
       searchResLink: '',
+      data_uri: null,
+      processing: false,
       pastSearches: []
     };
-    this.handleSearch = this.handleSearch.bind(this);
-    this.searchDb = this.searchDb.bind(this);
-    this.renderSearch = this.renderSearch.bind(this);
+
+    bindAll(this, 'handleFile', 'handleSearch', 'searchDb', 'renderSearch');
+    // this.handleSearch = this.handleSearch.bind(this);
+    // this.searchDb = this.searchDb.bind(this);
+    // this.renderSearch = this.renderSearch.bind(this);
   }
 
-
-  logout() {
-    this.props.auth.logout();
-    this.props.history.push('/');
+  logOutUser() {
+    //probs need some kind of server resp for ending session
+    console.log('log out button clicked');
+    this.props.history.push('/login');
   }
 
   renderPastSearches() {
@@ -55,6 +59,21 @@ class Dashboard extends Component {
     });
   }
 
+  handleFile(e) {
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    reader.onload = (upload) => {
+      this.setState({
+        data_uri: upload.target.result,
+        filename: file.name,
+        filetype: file.type
+      });
+    };
+
+    reader.readAsDataURL(file);
+  }
+
   renderSearch(searchResName, link) {
     this.setState({
       searchResName: searchResName,
@@ -84,47 +103,49 @@ class Dashboard extends Component {
     })
 
   }
-  render() {
-    const {isAuthenticated } = this.props.auth;
 
+  googleAPIsearch() {
+
+  }
+  
+  render() {
     return (
       <div>
-        {
-          !isAuthenticated() &&
-          <p>Please log in to gain access to this page</p>
-        }
-        {
-        isAuthenticated() && (
         <div>
-          <div>
-            <Button bsStyle="default" className="Logout-btn" onClick={this.logout.bind(this)}>LOG OUT</Button>
-          </div>
-          <div>
-            <h2>Search Ingredients 20/20</h2>
-          </div>
+          <div onClick={this.logOutUser.bind(this)}>LOG OUT</div>
+        </div>
+        <div>
+          <h2>Search Ingredients 20/20</h2>
+        </div>
 
-          <form onSubmit={this.searchDb}>
-            <input type="text" value={this.state.search} placeholder="Search Ingredient"
-                onChange={this.handleSearch}/>
-            <input type="submit" value="Submit"/>
-          </form>
+        <form onSubmit={this.searchDb}>
+          <input type="text" value={this.state.search} placeholder="Search Database for Ingredient"
+              onChange={this.handleSearch}/>
+          <input type="submit" value="Submit"/>
+        </form>
+
+        <form method='post' action='/api/upload' encType='multipart/form-data'>
+          <input type='file' name='image' onChange={this.handleFile} />
+          <input type="submit" value="Submit"/>
+        </form>
+
+
+        <div>
+          {this.state && this.state.searchResLink ?
+            <div>{this.state.searchResName + ' found in database! - '}
+              <a href={this.state.searchResLink} target="_blank">{this.state.searchResLink}</a>
+            </div> :
+            <div>{this.state.searchResName}</div>
+          }
+        </div>
+        <div>
+          <button onClick={this.renderPastSearches.bind(this)}>
+            MY SAVED ITEMS
+          </button>
           <div>
-            {this.state && this.state.searchResLink ?
-              <div>{this.state.searchResName + ' found in database! - '}
-                <a href={this.state.searchResLink} target="_blank">{this.state.searchResLink}</a>
-              </div> :
-              <div>{this.state.searchResName}</div>
-            }
+            {this.state.pastSearches}
           </div>
-          <div>
-            <button onClick={this.renderPastSearches.bind(this)}>
-              MY SAVED ITEMS
-            </button>
-            <div>
-              {this.state.pastSearches}
-            </div>
-          </div>
-        </div>)}
+        </div>
       </div>
     );
   }
