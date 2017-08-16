@@ -14,5 +14,6 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.post('/api/signup', handler.signup);
 app.post('/api/login', handler.login);
 app.post('/api/ingredients', handler.ingredients);
+app.post('/api/pastSearches', handler.pastSearches);
 
 module.exports = app;

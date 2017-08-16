@@ -46,8 +46,8 @@ exports.login = function(req, res) {
         user.comparePassword(password, user.password, function(err, match) {
           if (match) {
             // TODO: take them to dashboard?
-            console.log('line 62: success', username);
-            res.end();
+            console.log('user ID: ', user.id);
+            res.send(user.id);
             // res.redirect('/dashboard');
           } else {
             console.log('line 66: incorrect password');
@@ -62,6 +62,7 @@ exports.login = function(req, res) {
 //ingredient search api route
 exports.ingredients = function(req, res) {
   var ingredient = req.body.data.ingredient;
+  var userID = req.body.data.userID;
 
   Ingredient.findOne({name: ingredient})
     .exec(function(err, ingredientName) {
@@ -69,8 +70,32 @@ exports.ingredients = function(req, res) {
       if (!ingredientName) {
         res.status(401).send(`${ingredient} not in database`);
       } else {
+        console.log('ingredient name', ingredientName);
+        console.log('ingredient id', ingredientName._id);
+        User.findByIdAndUpdate(userID, {"$push": {"pastSearches": ingredientName._id}})
+          .exec(function(err, user) {
+            if (err) {
+              throw err;
+            } else {
+              console.log(user);
+            }
+          })
+
         res.json(ingredientName);
       }
     });
-
 };
+
+//get past searches api route
+exports.pastSearches = function(req, res) {
+  var userID = req.body.data.userID;
+  console.log(userID);
+  User.findOne({_id: userID})
+    .exec(function (err, user) {
+      if (!user) {
+        res.status(401).send('user not found in database');
+      } else {
+        res.send(user.pastSearches);
+      }
+    })
+}

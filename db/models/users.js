@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
   username: {type: String, required: true, index: {unique: true}},
-  password: {type: String}
+  password: {type: String},
+  pastSearches: Array 
 }, {collection: 'Users'});
 
 //comparePassword function to come when routing is done

@@ -6,6 +6,7 @@ import IncorrectPw from './IncorrectPw';
 import { Button } from 'react-bootstrap';
 import './App.css';
 
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -33,8 +34,10 @@ class Login extends Component {
     });
   }
 
-  onHandleSuccess() {
+  onHandleSuccess(userID) {
+    this.props.history.userID = userID;
     this.props.history.push('/dashboard');
+
   }
 
   onHandleNoUser() {
@@ -64,9 +67,9 @@ class Login extends Component {
     $.post('/api/login', {
       data: data
     })
-    .done(() => {
-      console.log('user was logged in');
-      this.onHandleSuccess();
+    .done((userID) => {
+      console.log('user was logged in w/ ID: ', userID);
+      this.onHandleSuccess(userID);
     })
     .fail((msg) => {
       //add a second fail method when password is wrong
