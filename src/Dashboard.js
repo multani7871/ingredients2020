@@ -11,8 +11,11 @@ class Dashboard extends Component {
       search: '',
       searchResName: '',
       searchResLink: '',
+<<<<<<< 3f2a175283b87a0cb4bd83a9c44041d53aaf2652
       data_uri: null,
       processing: false,
+=======
+>>>>>>> uninstall webcam
       pastSearches: []
     };
 
