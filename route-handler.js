@@ -89,7 +89,7 @@ exports.ingredients = function(req, res) {
 //get past searches api route
 exports.pastSearches = function(req, res) {
   var userID = req.body.data.userID;
-  console.log(userID);
+
   User.findOne({_id: userID})
     .exec(function (err, user) {
       if (!user) {
