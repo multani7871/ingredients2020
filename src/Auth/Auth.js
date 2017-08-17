@@ -3,10 +3,10 @@ import history from '../history';
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
-    domain: 'ingredients2020.auth0.com',
-    clientID: 'nVHF1bEueq3Dql5iNHVDZ3_soWw6qGd9',
-    redirectUri: 'http://localhost:3000/callback',
-    audience: 'https://ingredients2020.auth0.com/userinfo',
+    domain: process.env.REACT_APP_DOMAIN,
+    clientID: process.env.REACT_APP_CLIENTID,
+    redirectUri: process.env.REACT_APP_REDIRECTURI,
+    audience: process.env.REACT_APP_AUDIENCE,
     responseType: 'token id_token',
     scope: 'openid'
   });
