@@ -3,11 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< c02f5c6d20420bbed023ee9dfe6e176b601d3c3b
-    "auth0-js": "^8.9.1",
-=======
     "@google-cloud/vision": "^0.12.0",
->>>>>>> added google cloud
+    "auth0-js": "^8.9.1",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
@@ -19,10 +16,8 @@
     "express": "^4.15.4",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
-    "mime": "^1.3.6",
     "mocha": "^3.5.0",
     "mongoose": "^4.11.6",
-    "multer": "^1.3.0",
     "path": "^0.12.7",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
@@ -30,8 +25,7 @@
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.11",
     "request": "^2.81.0",
-    "supertest": "^3.0.0",
-    "util": "^0.10.3"
+    "supertest": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start & nodemon server.js",
