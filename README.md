@@ -2,6 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/mariasratbags/ingredients2020.svg?style=svg)](https://circleci.com/gh/mariasratbags/ingredients2020)
 
+[![Coverage Status](https://coveralls.io/repos/github/mariasratbags/ingredients2020/badge.svg?branch=master)](https://coveralls.io/github/mariasratbags/ingredients2020?branch=master)
+
 ## Team
 
   - __Product Owner__: Garima Batra
