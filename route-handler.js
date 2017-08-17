@@ -59,10 +59,10 @@ exports.googleCloudSearch = function(req, res) {
       res.write('<!DOCTYPE HTML><html><body>');
       // Base64 the image so we can display it on the page
       res.write('<img width=200 src="' + req.body.data_uri + '"><br>');
-      const detections = apiResponse.textAnnotations;
-      const arrayOfIngredients = [];
+      var detections = apiResponse.textAnnotations;
+      var arrayOfIngredients = [];
       detections.forEach((text) => arrayOfIngredients.push(text.description));
-      console.log('IT WORKED!!!:', arrayOfIngredients);
+      console.log('IT WORKED!!!:', arrayOfIngredients.slice);
       // Write out the JSON output of the Vision API
       res.write(JSON.stringify(arrayOfIngredients.slice(1)));
     }
