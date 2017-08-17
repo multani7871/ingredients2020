@@ -4,7 +4,7 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var should = chai.should();
 var expect = require('chai').expect;
-var app = require('../server');
+var app = require('../server-config');
 
 chai.use(chaiHttp);
 
@@ -12,7 +12,7 @@ describe('Authentication', function() {
   describe('naive', function() {
 
     it('should not serve the ingredients page w/out authentication', (done) => {
-      chai.request('http://localhost:8000')
+      chai.request(app)
       .get('/api/ingredients')
       .end((err, res) => {
         res.should.have.status(404);
@@ -21,7 +21,7 @@ describe('Authentication', function() {
     });
 
     it('should not serve the pastSearches page w/out authentication', (done) => {
-      chai.request('http://localhost:8000')
+      chai.request(app)
       .get('/api/ingredients')
       .end((err, res) => {
         res.should.have.status(404);
@@ -30,7 +30,7 @@ describe('Authentication', function() {
     });
 
     it('should not serve the images page w/out authentication', (done) => {
-      chai.request('http://localhost:8000')
+      chai.request(app)
       .get('/api/ingredients')
       .end((err, res) => {
         res.should.have.status(404);
