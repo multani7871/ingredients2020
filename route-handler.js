@@ -54,20 +54,33 @@ exports.googleCloudSearch = function(req, res) {
       console.log('ERROR CLOUD API DIDNT GO THROUGH', err);
       res.end('Cloud Vision Error:', err);
     }else {
-      res.writeHead(200, {
-        'Content-Type': 'text/html'
-      });
-      //res.write('<!DOCTYPE HTML><html><body>');
-      // Base64 the image so we can display it on the page
-      //res.write('<img width=200 src="' + req.body.data_uri + '"><br>');
+      // res.writeHead(200, {
+      //   'Content-Type': 'text/html'
+      // });
       var detections = apiResponse.textAnnotations;
       var arrayOfIngredients = [];
       detections.forEach((text) => arrayOfIngredients.push(text.description));
-      console.log('IT WORKED!!!:', arrayOfIngredients.slice(1));
-      res.send(base64);
-      // Write out the JSON output of the Vision API
-      //res.write(JSON.stringify(arrayOfIngredients.slice(1)));
-     // res.end('</body></html>');
+      var arrayStartingFrom1 = arrayOfIngredients.slice(1);
+      var parsedString = arrayStartingFrom1.map(function(el) {
+        return el.replace(/[^a-zA-Z ]/g, "");
+      })
+      console.log('IT WORKED!!!:', parsedString);
+
+      var ingredientArray = [];
+      parsedString.forEach(function(ingredient) {
+        Ingredient.findOne({name: ingredient})
+        .exec(function(err, ingredientName) {
+          //if there is an ingredient, return the document JSON, on the front end, we can extrapolate the name and link!
+          if (!ingredientName) {
+            // res.status(401).send(`${ingredient} not in database`);
+            console.log('ERROR');
+          } else {
+            ingredientArray.push(ingredientName);
+          }
+        });
+      })
+      console.log(ingredientArray);
+      res.json(ingredientArray);
     }
   })
 }

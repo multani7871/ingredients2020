@@ -14,6 +14,7 @@ class Dashboard extends Component {
       searchResLink: '',
       data_uri: null,
       processing: false,
+      passed: 'No Flagged Ingredients, feel free to gobble this up!',
       pastSearches: []
     };
 
@@ -59,11 +60,6 @@ class Dashboard extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const _this = this;
-
-    this.setState({
-      processing: true
-    });
-
     var data = {
       data_uri: this.state.data_uri,
       filename: this.state.filename,
@@ -77,8 +73,9 @@ class Dashboard extends Component {
       dataType: 'json'
     })
     .done(function(data){
+      console.log(data);
       _this.setState({
-        uploaded_uri: data.base64
+        passed: data
       });
     });
   }
@@ -128,10 +125,6 @@ class Dashboard extends Component {
 
   }
 
-  googleAPIsearch() {
-
-  }
-
   render() {
 
     const {isAuthenticated } = this.props.auth;
@@ -162,8 +155,7 @@ class Dashboard extends Component {
           <input type='file' name='image' onChange={this.handleFile} />
           <input type="submit" value="Submit"/>
         </form>
-        {uploaded}
-
+          <img src={this.state.data_uri} height="200" alt=""></img>
           <div>
             {this.state && this.state.searchResLink ?
               <div>{this.state.searchResName + ' found in database! - '}
