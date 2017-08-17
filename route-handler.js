@@ -34,7 +34,7 @@ exports.ingredients = function(req, res) {
 
 //get past searches api route
 exports.pastSearches = function(req, res) {
-  var userID = req.body.data.userID;
+  // var userID = req.body.data.userID;
 
   User.findOne({_id: userID})
     .exec(function (err, user) {
@@ -48,6 +48,7 @@ exports.pastSearches = function(req, res) {
 
 exports.googleCloudSearch = function(req, res) {
   var buf = new Buffer(req.body.data_uri.replace(/^data:image\/\w+;base64,/, ""),'base64');
+  var base64 = req.body.data_uri.replace(/^data:image\/\w+;base64,/, "");
   vision.textDetection({ content: buf }, function(err, apiResponse) {
     if(err) {
       console.log('ERROR CLOUD API DIDNT GO THROUGH', err);
@@ -56,15 +57,17 @@ exports.googleCloudSearch = function(req, res) {
       res.writeHead(200, {
         'Content-Type': 'text/html'
       });
-      res.write('<!DOCTYPE HTML><html><body>');
+      //res.write('<!DOCTYPE HTML><html><body>');
       // Base64 the image so we can display it on the page
-      res.write('<img width=200 src="' + req.body.data_uri + '"><br>');
+      //res.write('<img width=200 src="' + req.body.data_uri + '"><br>');
       var detections = apiResponse.textAnnotations;
       var arrayOfIngredients = [];
       detections.forEach((text) => arrayOfIngredients.push(text.description));
       console.log('IT WORKED!!!:', arrayOfIngredients.slice(1));
+      res.send(base64);
       // Write out the JSON output of the Vision API
-      res.write(JSON.stringify(arrayOfIngredients.slice(1)));
+      //res.write(JSON.stringify(arrayOfIngredients.slice(1)));
+     // res.end('</body></html>');
     }
   })
 }

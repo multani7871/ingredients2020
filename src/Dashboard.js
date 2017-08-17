@@ -58,7 +58,7 @@ class Dashboard extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    //const _this = this;
+    const _this = this;
 
     this.setState({
       processing: true
@@ -75,14 +75,12 @@ class Dashboard extends Component {
       type: 'POST',
       data: data,
       dataType: 'json'
+    })
+    .done(function(data){
+      _this.setState({
+        uploaded_uri: data.base64
+      });
     });
-
-    // promise.done(function(data){
-    //   _this.setState({
-    //     processing: false,
-    //     uploaded_uri: data.uri
-    //   });
-    // });
   }
 
   handleFile(e) {
@@ -129,6 +127,7 @@ class Dashboard extends Component {
     })
 
   }
+<<<<<<< 60c8f293eba7a1f4c2f7034a6f89b6ac041e9bfb
 
   googleAPIsearch() {
 
@@ -137,6 +136,21 @@ class Dashboard extends Component {
   render() {
 
     const {isAuthenticated } = this.props.auth;
+=======
+  
+  render() {
+    let uploaded;
+    
+        if (this.state.uploaded_uri) {
+          uploaded = (
+            <div>
+              <h4>Image uploaded!</h4>
+              <img className='image-preview' src={this.state.uploaded_uri} />
+              <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
+            </div>
+          );
+        }
+>>>>>>> tried to preview image
 
     return (
       <div>
@@ -147,12 +161,20 @@ class Dashboard extends Component {
         {
         isAuthenticated() && (
         <div>
+<<<<<<< 60c8f293eba7a1f4c2f7034a6f89b6ac041e9bfb
           <div>
             <Button bsStyle="default" className="Logout-btn" onClick={this.logout}>LOG OUT</Button>
           </div>
           <div>
             <h2>Search Ingredients 20/20</h2>
           </div>
+=======
+          <div onClick={this.logOutUser}>LOG OUT</div>
+        </div>
+        <div>
+          <h2>Search Ingredients 20/20</h2>
+        </div>
+>>>>>>> tried to preview image
 
           <form onSubmit={this.searchDb}>
             <input type="text" value={this.state.search} placeholder="Search Database for Ingredient"
@@ -160,11 +182,19 @@ class Dashboard extends Component {
             <input type="submit" value="Submit"/>
           </form>
 
+<<<<<<< 60c8f293eba7a1f4c2f7034a6f89b6ac041e9bfb
           <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
             <input type='file' name='image' onChange={this.handleFile} />
             <input type="submit" value="Submit"/>
           </form>
 
+=======
+        <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
+          <input type='file' name='image' onChange={this.handleFile} />
+          <input type="submit" value="Submit"/>
+        </form>
+        {uploaded}
+>>>>>>> tried to preview image
 
           <div>
             {this.state && this.state.searchResLink ?
