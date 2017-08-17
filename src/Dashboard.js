@@ -51,6 +51,7 @@ class Dashboard extends Component {
 
   }
 
+
   handleSearch(event) {
     this.setState({
       search: event.target.value
@@ -96,6 +97,7 @@ class Dashboard extends Component {
   }
 
   renderSearch(searchResName, link) {
+    console.log(this);
     this.setState({
       searchResName: searchResName,
       searchResLink: link || ''
@@ -128,7 +130,7 @@ class Dashboard extends Component {
   render() {
 
     const {isAuthenticated } = this.props.auth;
-
+  
     return (
       <div>
         {

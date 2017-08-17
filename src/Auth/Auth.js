@@ -1,5 +1,6 @@
 import auth0 from 'auth0-js';
 import history from '../history';
+import $ from 'jquery';
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
@@ -22,11 +23,20 @@ export default class Auth {
     this.auth0.authorize();
   }
 
+  getUserIdFromAuth0(authResult) {
+    var userInfoEndPoint = this.auth0.baseOptions.audience;
+    var accessToken = authResult.accessToken;
+    // $.get(userInfoEndPoint)
+  }
+
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
+        this.getUserIdFromAuth0(authResult);
         history.replace('/dashboard');
+        console.log(authResult);
+        console.log(this);
       } else if (err) {
         history.replace('/dashboard');
         console.log(err);
