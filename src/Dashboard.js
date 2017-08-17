@@ -17,9 +17,6 @@ class Dashboard extends Component {
     };
 
     bindAll(this, 'renderPastSearches', 'handleFile', 'handleSearch', 'handleSubmit', 'searchDb', 'renderSearch');
-    // this.handleSearch = this.handleSearch.bind(this);
-    // this.searchDb = this.searchDb.bind(this);
-    // this.renderSearch = this.renderSearch.bind(this);
   }
 
   logOutUser() {
@@ -72,8 +69,6 @@ class Dashboard extends Component {
       filename: this.state.filename,
       filetype: this.state.filetype
     }
-
-    console.log(data);
 
     $.ajax({
       url: '/api/image',

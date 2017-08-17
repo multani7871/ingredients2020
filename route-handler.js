@@ -62,7 +62,7 @@ exports.googleCloudSearch = function(req, res) {
       var detections = apiResponse.textAnnotations;
       var arrayOfIngredients = [];
       detections.forEach((text) => arrayOfIngredients.push(text.description));
-      console.log('IT WORKED!!!:', arrayOfIngredients.slice);
+      console.log('IT WORKED!!!:', arrayOfIngredients.slice(1));
       // Write out the JSON output of the Vision API
       res.write(JSON.stringify(arrayOfIngredients.slice(1)));
     }
