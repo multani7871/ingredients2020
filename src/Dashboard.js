@@ -16,7 +16,7 @@ class Dashboard extends Component {
       pastSearches: []
     };
 
-    bindAll(this, 'handleFile', 'handleSearch', 'searchDb', 'renderSearch');
+    bindAll(this, 'renderPastSearches', 'handleFile', 'handleSearch', 'handleSubmit', 'searchDb', 'renderSearch');
     // this.handleSearch = this.handleSearch.bind(this);
     // this.searchDb = this.searchDb.bind(this);
     // this.renderSearch = this.renderSearch.bind(this);
@@ -59,11 +59,40 @@ class Dashboard extends Component {
     });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    //const _this = this;
+
+    this.setState({
+      processing: true
+    });
+
+    var data = {
+      data_uri: this.state.data_uri,
+      filename: this.state.filename,
+      filetype: this.state.filetype
+    }
+
+    console.log(data);
+
+    $.ajax({
+      url: '/api/image',
+      type: 'POST',
+      data: data,
+      dataType: 'json'
+    });
+
+    // promise.done(function(data){
+    //   _this.setState({
+    //     processing: false,
+    //     uploaded_uri: data.uri
+    //   });
+    // });
+  }
+
   handleFile(e) {
     const reader = new FileReader();
     const file = e.target.files[0];
-    console.log(e);
-    console.log(reader);
 
     reader.onload = (upload) => {
       this.setState({
@@ -126,7 +155,7 @@ class Dashboard extends Component {
           <input type="submit" value="Submit"/>
         </form>
 
-        <form method='post' action='/api/upload' encType='multipart/form-data'>
+        <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
           <input type='file' name='image' onChange={this.handleFile} />
           <input type="submit" value="Submit"/>
         </form>
@@ -140,6 +169,7 @@ class Dashboard extends Component {
             <div>{this.state.searchResName}</div>
           }
         </div>
+
         <div>
           <button onClick={this.renderPastSearches.bind(this)}>
             MY SAVED ITEMS

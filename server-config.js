@@ -6,12 +6,13 @@ var handler = require('./route-handler');
 var app = express();
 
 //middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({limit: '100mb'}));
+app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 app.use(express.static(path.join(__dirname, 'build')));
 
 //routes
 app.post('/api/ingredients', handler.ingredients);
 app.post('/api/pastSearches', handler.pastSearches);
+app.post('/api/image', handler.googleCloudSearch);
 
 module.exports = app;
