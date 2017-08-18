@@ -33,11 +33,14 @@
     "server-test": "mocha",
     "client-test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "proxy": "http://localhost:8000",
   "devDependencies": {
     "coveralls": "^2.13.1",
+    "istanbul": "^0.4.5",
     "mocha-lcov-reporter": "^1.3.0"
   }
 }
