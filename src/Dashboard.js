@@ -128,7 +128,7 @@ class Dashboard extends Component {
   }
 
   render() {
-
+    console.log(this.props.auth);
     const {isAuthenticated } = this.props.auth;
 
     return (
