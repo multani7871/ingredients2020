@@ -1,6 +1,7 @@
 var db = require('./db/config');
 var User = require('./db/models/users');
 var Ingredient = require('./db/models/ingredients');
+var path = require('path');
 
 var vision = require('@google-cloud/vision')({
   keyFilename: 'key.json',
@@ -111,7 +112,6 @@ exports.googleCloudSearch = function(req, res) {
 }
 
 exports.callback = function(req, res) {
-  // var userID = req.body.data.userID;
-  console.log(path.join(__dirname, 'build'));
-  res.send(path.join(__dirname, 'build'));
+  console.log(path.join(__dirname, 'build/index'));
+  res.send(path.join(__dirname, 'build/index'));
 }
