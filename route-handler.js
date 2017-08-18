@@ -7,10 +7,35 @@ var vision = require('@google-cloud/vision')({
   projectId: 'ingredients2020-176919'
 });
 
+//createUser api route
+exports.findOrCreateUser = function(req, res) {
+  var email = req.body.email;
+
+  User.findOne({username: email})
+    .exec(function(err, user) {
+      // if user doesn't exist, create a new user
+      if(!user) {
+        var newUser = new User({username: email})
+        newUser.save((err, user) => {
+          if (err) {
+            console.log('user not found and not saved!')
+          } else {
+            res.status(201).send(user.username);
+          }
+        });
+      } else if (user){
+        res.status(200).send(user.username);
+      } else {
+        res.sendStatus(400);
+      }
+
+    });
+}
+
 //ingredient search api route
 exports.ingredients = function(req, res) {
   var ingredient = req.body.data.ingredient;
-  var userID = req.body.data.userID;
+  var username = req.body.data.username;
 
   Ingredient.findOne({name: ingredient})
     .exec(function(err, ingredientName) {
@@ -18,7 +43,7 @@ exports.ingredients = function(req, res) {
       if (!ingredientName) {
         res.status(401).send(`${ingredient} not in database`);
       } else {
-        User.findByIdAndUpdate(userID, {"$push": {"pastSearches": ingredientName.name}})
+        User.findOneAndUpdate({username: username}, {"$push": {"pastSearches": ingredientName.name}})
           .exec(function(err, user) {
             if (err) {
               throw err;
@@ -35,8 +60,8 @@ exports.ingredients = function(req, res) {
 //get past searches api route
 exports.pastSearches = function(req, res) {
   // var userID = req.body.data.userID;
-
-  User.findOne({_id: userID})
+  var username = req.body.data.username;
+  User.findOne({username: username})
     .exec(function (err, user) {
       if (!user) {
         res.status(401).send('user not found in database');
@@ -53,7 +78,7 @@ exports.googleCloudSearch = function(req, res) {
     if(err) {
       console.log('ERROR CLOUD API DIDNT GO THROUGH', err);
       res.end('Cloud Vision Error:', err);
-    }else {
+    } else {
       // res.writeHead(200, {
       //   'Content-Type': 'text/html'
       // });

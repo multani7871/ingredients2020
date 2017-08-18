@@ -1,6 +1,7 @@
 import auth0 from 'auth0-js';
 import history from '../history';
 import $ from 'jquery';
+import {bindAll} from 'lodash';
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
@@ -9,34 +10,51 @@ export default class Auth {
     redirectUri: process.env.REACT_APP_REDIRECTURI,
     audience: process.env.REACT_APP_AUDIENCE,
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: 'openid email'
   });
 
-  constructor() {
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-    this.handleAuthentication = this.handleAuthentication.bind(this);
-    this.isAuthenticated = this.isAuthenticated.bind(this);
+
+  constructor(props) {
+    bindAll(this, 'login', 'logout', 'handleAuthentication', 'isAuthenticated','getEmailFromAuth0','findOrCreateUser', 'getAccessToken');
+  }
+  findOrCreateUser(err, email) {
+    $.post('/api/findOrCreateUser', email)
+     .done((username) => {
+       localStorage.setItem('username', username);
+       console.log('user found or created!', username);
+     })
+     .fail(() => {
+       console.log('couldnt find or create user!!!');
+     })
+  }
+
+  getAccessToken () {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('No access token found');
+    }
+    return accessToken;
+  }
+
+  getEmailFromAuth0(cb) {
+    let accessToken = this.getAccessToken();
+    this.auth0.client.userInfo(accessToken, (err, email) => {
+      if (email) {
+        cb(err, email);
+      }
+    });
   }
 
   login() {
     this.auth0.authorize();
   }
 
-  getUserIdFromAuth0(authResult) {
-    var userInfoEndPoint = this.auth0.baseOptions.audience;
-    var accessToken = authResult.accessToken;
-    // $.get(userInfoEndPoint)
-  }
-
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        this.getUserIdFromAuth0(authResult);
+        this.getEmailFromAuth0(this.findOrCreateUser);
         history.replace('/dashboard');
-        console.log(authResult);
-        console.log(this);
       } else if (err) {
         history.replace('/dashboard');
         console.log(err);

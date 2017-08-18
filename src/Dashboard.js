@@ -15,7 +15,8 @@ class Dashboard extends Component {
       data_uri: null,
       processing: false,
       passed: 'No Flagged Ingredients, feel free to gobble this up!',
-      pastSearches: []
+      pastSearches: [],
+      username: localStorage.getItem('username')
     };
 
     bindAll(this, 'renderPastSearches', 'handleFile', 'handleSearch', 'handleSubmit', 'searchDb', 'renderSearch', 'logout');
@@ -30,10 +31,10 @@ class Dashboard extends Component {
     console.log('my saved items btn was clicked');
 
     var data = {
-      userID: this.props.history.userID
+      username: this.state.username
     }
     //here we need to create a get method to populate pastSearches array
-    console.log('line 34', data.userID);
+
     $.post('/api/pastSearches', {
       data: data
     })
@@ -97,7 +98,7 @@ class Dashboard extends Component {
   }
 
   renderSearch(searchResName, link) {
-    console.log(this);
+
     this.setState({
       searchResName: searchResName,
       searchResLink: link || ''
@@ -106,13 +107,12 @@ class Dashboard extends Component {
 
   searchDb(e) {
     e.preventDefault();
-
     var lowerCaseSearch = this.state.search.toLowerCase();
-    var userID = this.props.history.userID;
+    var username = this.state.username;
 
     var data = {
       ingredient: lowerCaseSearch,
-      userID: userID
+      username: username
     }
 
     $.post('/api/ingredients', {
@@ -130,7 +130,7 @@ class Dashboard extends Component {
   render() {
 
     const {isAuthenticated } = this.props.auth;
-  
+
     return (
       <div>
         {
