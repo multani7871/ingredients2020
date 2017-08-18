@@ -112,5 +112,5 @@ exports.googleCloudSearch = function(req, res) {
 }
 
 exports.callback = function(req, res) {
-  res.redirect(path.join(__dirname, 'build/index.html'));
+  res.sendFile(path.join(__dirname, 'build/index.html'));
 }
