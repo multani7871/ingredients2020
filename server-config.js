@@ -14,5 +14,6 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.post('/api/ingredients', handler.ingredients);
 app.post('/api/pastSearches', handler.pastSearches);
 app.post('/api/image', handler.googleCloudSearch);
+app.get('/callback', handler.callback);
 app.post('/api/findOrCreateUser', handler.findOrCreateUser);
 module.exports = app;
