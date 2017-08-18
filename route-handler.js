@@ -74,7 +74,6 @@ exports.pastSearches = function(req, res) {
 
 exports.googleCloudSearch = function(req, res) {
   var buf = new Buffer(req.body.data_uri.replace(/^data:image\/\w+;base64,/, ""),'base64');
-  var base64 = req.body.data_uri.replace(/^data:image\/\w+;base64,/, "");
   vision.textDetection({ content: buf }, function(err, apiResponse) {
     if(err) {
       console.log('ERROR CLOUD API DIDNT GO THROUGH', err);
