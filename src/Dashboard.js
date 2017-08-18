@@ -118,11 +118,11 @@ class Dashboard extends Component {
     $.post('/api/ingredients', {
       data: data
     })
-    .done((str) => {
-      this.renderSearch(str.name, str.link);
+    .done((obj) => {
+      this.renderSearch(obj.name, obj.link);
     })
-    .fail((str) => {
-      this.renderSearch(str.responseText);
+    .fail((obj) => {
+      this.renderSearch(obj.responseText);
     })
 
   }
@@ -168,11 +168,16 @@ class Dashboard extends Component {
           </div>
 
           <div>
-            <button onClick={this.renderPastSearches.bind(this)}>
+            <button onClick={this.renderPastSearches}>
               MY SAVED ITEMS
             </button>
             <div>
-              {this.state.pastSearches}
+              {this.state.pastSearches.map((ingredient) => (
+                <search
+                  key={ingredient._id}
+                >{ingredient.name + ' - ' + ingredient.link}<br/></search>
+              )
+              )}
             </div>
           </div>
         </div>)}

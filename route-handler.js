@@ -38,12 +38,12 @@ exports.ingredients = function(req, res) {
   var username = req.body.data.username;
 
   Ingredient.findOne({name: ingredient})
-    .exec(function(err, ingredientName) {
+    .exec(function(err, ingredientObj) {
       //if there is an ingredient, return the document JSON, on the front end, we can extrapolate the name and link!
-      if (!ingredientName) {
+      if (!ingredientObj) {
         res.status(401).send(`${ingredient} not in database`);
       } else {
-        User.findOneAndUpdate({username: username}, {"$push": {"pastSearches": ingredientName.name}})
+        User.findOneAndUpdate({username: username}, {"$push": {"pastSearches": ingredientObj}})
           .exec(function(err, user) {
             if (err) {
               throw err;
@@ -52,7 +52,7 @@ exports.ingredients = function(req, res) {
             }
           })
 
-        res.json(ingredientName);
+        res.json(ingredientObj);
       }
     });
 };
