@@ -12,6 +12,10 @@
       "link":"http://www.wholefoodsmarket.com/about-our-products/quality-standards/food-ingredient"
    },
    {  
+    "name":"monoglyceride",
+    "link":"http://www.wholefoodsmarket.com/about-our-products/quality-standards/food-ingredient"
+   },
+   {  
       "name":"alum",
       "link":"https://www.panerabread.com/panerabread/documents/panera-no-no-list-05-2015.pdf"
    },
@@ -46,6 +50,14 @@
    {  
       "name":"artificial colors",
       "link":"https://www.panerabread.com/panerabread/documents/panera-no-no-list-05-2015.pdf"
+   },
+   {  
+    "name":"artificial flavour colour",
+    "link":"https://www.panerabread.com/panerabread/documents/panera-no-no-list-05-2015.pdf"
+   },
+   {  
+    "name":"artificial flavor color",
+    "link":"https://www.panerabread.com/panerabread/documents/panera-no-no-list-05-2015.pdf"
    },
    {  
       "name":"sodium carboxymethyl cellulose",
@@ -288,6 +300,10 @@
       "link":"https://www.panerabread.com/panerabread/documents/panera-no-no-list-05-2015.pdf"
    },
    {  
+    "name":"polyglycerol esters of fatty acids",
+    "link":"https://www.panerabread.com/panerabread/documents/panera-no-no-list-05-2015.pdf"
+   },
+   {  
       "name":"ethyl vanillin",
       "link":"http://www.wholefoodsmarket.com/about-our-products/quality-standards/food-ingredient"
    },
@@ -324,9 +340,13 @@
       "link":"https://www.panerabread.com/panerabread/documents/panera-no-no-list-05-2015.pdf"
    },
    {  
-      "name":"gmp (disodium guanylate)",
+      "name":"disodium guanylate",
       "link":"http://www.wholefoodsmarket.com/about-our-products/quality-standards/food-ingredient"
    },
+   {  
+    "name":"gmp",
+    "link":"http://www.wholefoodsmarket.com/about-our-products/quality-standards/food-ingredient"
+ },
    {  
       "name":"mono, di & triglycerides, all forms",
       "link":"https://www.panerabread.com/panerabread/documents/panera-no-no-list-05-2015.pdf"
@@ -340,8 +360,12 @@
       "link":"http://www.wholefoodsmarket.com/about-our-products/quality-standards/food-ingredient"
    },
    {  
-      "name":"high fructose corn syrup (hfcs)",
+      "name":"high fructose corn syrup",
       "link":"https://www.panerabread.com/panerabread/documents/panera-no-no-list-05-2015.pdf"
+   },
+   {  
+    "name":"hfcs",
+    "link":"https://www.panerabread.com/panerabread/documents/panera-no-no-list-05-2015.pdf"
    },
    {  
       "name":"hydrogenated fats",
@@ -684,43 +708,43 @@
       "link":"https://www.panerabread.com/panerabread/documents/panera-no-no-list-05-2015.pdf"
    },
    {  
-      "name":"red #40",
+      "name":"red 40",
       "link":"http://mphprogramslist.com/50-jawdroppingly-toxic-food-additives-to-avoid/"
    },
    {  
-      "name":"blue #1",
+      "name":"blue 1",
       "link":"http://mphprogramslist.com/50-jawdroppingly-toxic-food-additives-to-avoid/"
    },
    {  
-      "name":"blue #2",
+      "name":"blue 2",
       "link":"http://mphprogramslist.com/50-jawdroppingly-toxic-food-additives-to-avoid/"
    },
    {  
-      "name":"citrus red #1",
+      "name":"citrus red 1",
       "link":"http://mphprogramslist.com/50-jawdroppingly-toxic-food-additives-to-avoid/"
    },
    {  
-      "name":"citrus red #2",
+      "name":"citrus red 2",
       "link":"http://mphprogramslist.com/50-jawdroppingly-toxic-food-additives-to-avoid/"
    },
    {  
-      "name":"green #3",
+      "name":"green 3",
       "link":"http://mphprogramslist.com/50-jawdroppingly-toxic-food-additives-to-avoid/"
    },
    {  
-      "name":"yellow #5",
+      "name":"yellow 5",
       "link":"http://mphprogramslist.com/50-jawdroppingly-toxic-food-additives-to-avoid/"
    },
    {  
-      "name":"yellow #6",
+      "name":"yellow 6",
       "link":"http://mphprogramslist.com/50-jawdroppingly-toxic-food-additives-to-avoid/"
    },
    {  
-      "name":"red #2",
+      "name":"red 2",
       "link":"http://mphprogramslist.com/50-jawdroppingly-toxic-food-additives-to-avoid/"
    },
    {  
-      "name":"red #3",
+      "name":"red 3",
       "link":"http://mphprogramslist.com/50-jawdroppingly-toxic-food-additives-to-avoid/"
    },
    {  
