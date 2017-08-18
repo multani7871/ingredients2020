@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import loading from './loading.svg';
-import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+// import { Link } from 'react-router-dom';
+// import { Button } from 'react-bootstrap';
 import './../App.css';
 
 class Callback extends Component {
