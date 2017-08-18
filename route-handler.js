@@ -71,11 +71,6 @@ exports.pastSearches = function(req, res) {
     })
 }
 
-exports.callback = function(req, res) {
-  // var userID = req.body.data.userID;
-  res.send('index');
-}
-
 exports.googleCloudSearch = function(req, res) {
   var buf = new Buffer(req.body.data_uri.replace(/^data:image\/\w+;base64,/, ""),'base64');
   var base64 = req.body.data_uri.replace(/^data:image\/\w+;base64,/, "");
@@ -113,4 +108,10 @@ exports.googleCloudSearch = function(req, res) {
       res.json(ingredientArray);
     }
   })
+}
+
+exports.callback = function(req, res) {
+  // var userID = req.body.data.userID;
+  console.log(path.join(__dirname, 'build'));
+  res.send(path.join(__dirname, 'build'));
 }
