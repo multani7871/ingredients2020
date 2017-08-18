@@ -82,30 +82,32 @@ exports.googleCloudSearch = function(req, res) {
       // res.writeHead(200, {
       //   'Content-Type': 'text/html'
       // });
-      var detections = apiResponse.textAnnotations;
+      var detections = apiResponse.fullTextAnnotation.text;
       var arrayOfIngredients = [];
-      detections.forEach((text) => arrayOfIngredients.push(text.description));
-      var arrayStartingFrom1 = arrayOfIngredients.slice(1);
-      var parsedString = arrayStartingFrom1.map(function(el) {
-        return el.replace(/[^a-zA-Z ]/g, "");
-      })
-      console.log('IT WORKED!!!:', parsedString);
+      //console.log('this is the string', apiResponse.fullTextAnnotation);
+      var ingredientsArray = detections.replace(/\n/g, ' ').replace(/\./g, ',').toLowerCase().split(', ');
+      console.log('this is the filtered array ', ingredientsArray);
 
-      var ingredientArray = [];
-      parsedString.forEach(function(ingredient) {
-        Ingredient.findOne({name: ingredient})
-        .exec(function(err, ingredientName) {
+      var toxicIngredients = [];
+      ingredientsArray.forEach(function(ingredient) {
+        (function (currentIngredient) {
+        Ingredient.findOne({name: currentIngredient}, 
+          function(err, ingredientObj) {
           //if there is an ingredient, return the document JSON, on the front end, we can extrapolate the name and link!
-          if (!ingredientName) {
+          if (err) {
             // res.status(401).send(`${ingredient} not in database`);
-            console.log('ERROR');
-          } else {
-            ingredientArray.push(ingredientName);
+            console.log('ERROR:' + err);
+          } else if(ingredientObj) {
+            console.log('THE INGREDIENT EXISTS');
+            console.log(ingredientObj)
+            toxicIngredients.push(ingredientObj);
           }
         });
+      }) (ingredient);
+
       })
-      console.log(ingredientArray);
-      res.json(ingredientArray);
+      console.log(toxicIngredients);
+      res.json(toxicIngredients);
     }
   })
 }
