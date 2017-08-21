@@ -12,6 +12,7 @@ class Dashboard extends Component {
       search: '',
       searchResName: '',
       searchResLink: '',
+      currentFlagged: [],
       data_uri: null,
       processing: false,
       passed: 'No Flagged Ingredients, feel free to gobble this up!',
@@ -39,9 +40,8 @@ class Dashboard extends Component {
       data: data
     })
     .done((items) => {
-      console.log('items received');
+      console.log('items received', items);
       //on sucess we set the new state
-      console.log(items);
       this.setState({
         pastSearches: items
       });
@@ -65,7 +65,8 @@ class Dashboard extends Component {
     var data = {
       data_uri: this.state.data_uri,
       filename: this.state.filename,
-      filetype: this.state.filetype
+      filetype: this.state.filetype,
+      username: this.state.username
     }
 
     $.ajax({
@@ -77,7 +78,7 @@ class Dashboard extends Component {
     .done(function(data){
       console.log(data);
       _this.setState({
-        passed: data
+        currentFlagged: data
       });
     });
   }
@@ -158,8 +159,18 @@ class Dashboard extends Component {
           <input className="Submit-btn" type="submit" value="Submit"/>
         </form>
           <img src={this.state.data_uri} height="200" alt=""></img>
+
           <div>
-            {this.state && this.state.searchResLink ?
+              {this.state.currentFlagged.map((ingredient) => (
+                <search
+                  key={ingredient._id}
+                >{ingredient.name + ' - ' + ingredient.link}<br/></search>
+              )
+              )}
+          </div>
+          
+          <div>
+            {this.state.searchResLink ?
               <div>{this.state.searchResName + ' found in database! - '}
                 <a href={this.state.searchResLink} target="_blank">{this.state.searchResLink}</a>
               </div> :
@@ -173,9 +184,7 @@ class Dashboard extends Component {
             </Button>
             <div>
               {this.state.pastSearches.map((ingredient) => (
-                <search
-                  key={ingredient._id}
-                >{ingredient.name + ' - ' + ingredient.link}<br/></search>
+                <search key={ingredient._id}>{ingredient.name + ' - ' + ingredient.link}<br/></search>
               )
               )}
             </div>

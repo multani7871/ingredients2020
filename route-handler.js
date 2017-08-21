@@ -78,36 +78,31 @@ exports.googleCloudSearch = function(req, res) {
     if(err) {
       res.end('Cloud Vision Error:', err);
     } else {
-      // res.writeHead(200, {
-      //   'Content-Type': 'text/html'
-      // });
       var detections = apiResponse.fullTextAnnotation.text;
       var arrayOfIngredients = [];
-      //console.log('this is the string', apiResponse.fullTextAnnotation);
       var ingredientsArray = detections.replace(/\n/g, ' ').replace(/\./g, ',').toLowerCase().split(', ');
-      console.log('this is the filtered array ', ingredientsArray);
-
       var toxicIngredients = [];
       const numberOfIngredients = ingredientsArray.length;
       var counter = 0;
       ingredientsArray.forEach(function(ingredient, index) {
         Ingredient.findOne({name: ingredient}, 
           function(err, ingredientObj) {
-          console.log(index);
-          console.log(numberOfIngredients);
           //if there is an ingredient, return the document JSON, on the front end, we can extrapolate the name and link!
          counter++;
           if (err) {
             // res.status(401).send(`${ingredient} not in database`);
             console.log('ERROR:' + err);
           } else if(ingredientObj) {
-            console.log('THE INGREDIENT EXISTS');
             console.log(ingredientObj);
             toxicIngredients.push(ingredientObj);
           } 
 
           if (counter === numberOfIngredients-1){
-            console.log(toxicIngredients);
+            toxicIngredients.forEach(function(ingredientObj){
+              ingredientObj.filename = req.body.filename;
+            })
+            //console.log(sendtoDatabaseIngredients);
+            User.findOneAndUpdate({username: req.body.username}, {"$push": {"pastSearches": toxicIngredients}})
             res.json(toxicIngredients);
           }
 
