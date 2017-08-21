@@ -21,7 +21,6 @@ export default class Auth {
     $.post('/api/findOrCreateUser', email)
      .done((username) => {
        localStorage.setItem('username', username);
-       console.log('user found or created!', username);
      })
      .fail(() => {
        console.log('couldnt find or create user!!!');
