@@ -15,7 +15,7 @@ class Dashboard extends Component {
       currentFlagged: [],
       data_uri: null,
       processing: false,
-      passed: 'No Flagged Ingredients, feel free to gobble this up!',
+      passed: '',
       pastSearches: [],
       username: localStorage.getItem('username')
     };
@@ -40,10 +40,13 @@ class Dashboard extends Component {
       data: data
     })
     .done((items) => {
-      console.log('items received', items);
       //on sucess we set the new state
+      var totalIngredients = items.reduce(function(total, el){
+        return total.concat(el);
+      }, []);
+      console.log('items received', totalIngredients);
       this.setState({
-        pastSearches: items
+        pastSearches: totalIngredients
       });
     })
     .fail(() => {
@@ -77,10 +80,15 @@ class Dashboard extends Component {
     })
     .done(function(data){
       console.log(data);
+      if(data.length === 0){
+        _this.setState({
+          passed: 'No Flagged Ingredients, feel free to gobble this up!'
+        })
+      }
       _this.setState({
         currentFlagged: data
       });
-    });
+    })
   }
 
   handleFile(e) {
@@ -167,6 +175,7 @@ class Dashboard extends Component {
                 >{ingredient.name + ' - ' + ingredient.link}<br/></search>
               )
               )}
+              {this.state.passed && <div> {this.state.passed} </div>}
           </div>
 
           <div>
@@ -180,13 +189,14 @@ class Dashboard extends Component {
 
           <div className="Button-parent">
             <Button className="Saved-items" onClick={this.renderPastSearches}>
-              MY SAVED ITEMS
+              MY PAST SEARCHES
             </Button>
             <div>
               {this.state.pastSearches.map((ingredient) => (
                 <search key={ingredient._id}>{ingredient.name + ' - ' + ingredient.link}<br/></search>
               )
               )}
+              
             </div>
           </div>
         </div>)}

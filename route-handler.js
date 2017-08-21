@@ -90,7 +90,7 @@ exports.googleCloudSearch = function(req, res) {
           //if there is an ingredient, return the document JSON, on the front end, we can extrapolate the name and link!
          counter++;
           if (err) {
-            // res.status(401).send(`${ingredient} not in database`);
+            //res.status(401).send(`${ingredient} not in database`);
             console.log('ERROR:' + err);
           } else if(ingredientObj) {
             console.log(ingredientObj);
@@ -98,11 +98,20 @@ exports.googleCloudSearch = function(req, res) {
           } 
 
           if (counter === numberOfIngredients-1){
-            toxicIngredients.forEach(function(ingredientObj){
-              ingredientObj.filename = req.body.filename;
-            })
-            //console.log(sendtoDatabaseIngredients);
+            var filenameObj = {
+              name: req.body.filename,
+              link: 'Below are the flagged ingredients from this image'
+            }
+            toxicIngredients.unshift(filenameObj);
+            //console.log(toxicIngredients);
             User.findOneAndUpdate({username: req.body.username}, {"$push": {"pastSearches": toxicIngredients}})
+            .exec(function(err, user) {
+              if (err) {
+                throw err;
+              } else {
+                //console.log(user);
+              }
+            })
             res.json(toxicIngredients);
           }
 
