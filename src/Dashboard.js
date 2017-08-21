@@ -158,8 +158,7 @@ class Dashboard extends Component {
           <input className="custom-file-input" type='file' name='image' onChange={this.handleFile} />
           <input className="Submit-btn neg-margin-t" type="submit" value="Submit"/>
         </form>
-<<<<<<< HEAD
-          <img src={this.state.data_uri} height="200" alt=""></img>
+          <img src={this.state.data_uri} className="Image-size" alt=""></img>
 
           <div>
               {this.state.currentFlagged.map((ingredient) => (
@@ -169,10 +168,7 @@ class Dashboard extends Component {
               )
               )}
           </div>
-          
-=======
-          <img src={this.state.data_uri} className="Image-size" alt=""></img>
->>>>>>> extra styling
+
           <div>
             {this.state.searchResLink ?
               <div>{this.state.searchResName + ' found in database! - '}
