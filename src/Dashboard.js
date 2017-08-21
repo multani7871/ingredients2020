@@ -80,7 +80,7 @@ class Dashboard extends Component {
     })
     .done(function(data){
       console.log(data);
-      if(data.length === 0){
+      if(data.slice(1).length === 0){
         _this.setState({
           passed: 'No Flagged Ingredients, feel free to gobble this up!'
         })

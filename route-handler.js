@@ -104,14 +104,16 @@ exports.googleCloudSearch = function(req, res) {
             }
             toxicIngredients.unshift(filenameObj);
             //console.log(toxicIngredients);
-            User.findOneAndUpdate({username: req.body.username}, {"$push": {"pastSearches": toxicIngredients}})
-            .exec(function(err, user) {
-              if (err) {
-                throw err;
-              } else {
-                //console.log(user);
-              }
-            })
+            if(toxicIngredients.slice(1).length > 0){
+              User.findOneAndUpdate({username: req.body.username}, {"$push": {"pastSearches": toxicIngredients}})
+              .exec(function(err, user) {
+                if (err) {
+                  throw err;
+                } else {
+                  //console.log(user);
+                }
+              })
+            }
             res.json(toxicIngredients);
           }
 
