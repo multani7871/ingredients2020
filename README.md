@@ -4,6 +4,8 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/mariasratbags/ingredients2020/badge.svg?branch=master)](https://coveralls.io/github/mariasratbags/ingredients2020?branch=master)
 
+Scan ingredient labels to detect toxic ingredients.
+
 ## Team
 
   - __Product Owner__: Garima Batra
@@ -22,19 +24,11 @@
 
 ## Usage
 
-> Some usage instructions
-
-## Requirements
-
-
-## Development
-
-### Installing Dependencies
+See the CONTRIBUTING.md instructions for setup and install.
 
 ### Roadmap
 
 View the project roadmap [here](https://waffle.io/mariasratbags/ingredients2020)
-
 
 ## Contributing
 
