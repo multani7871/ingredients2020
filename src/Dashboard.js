@@ -3,7 +3,6 @@ import './App.css';
 import {bindAll} from 'lodash';
 import $ from 'jquery';
 import { Button } from 'react-bootstrap';
-// import SavedItems from './SavedItems';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -29,8 +28,6 @@ class Dashboard extends Component {
   }
 
   renderPastSearches() {
-    console.log('my saved items btn was clicked');
-
     var data = {
       username: this.state.username
     }
@@ -44,7 +41,6 @@ class Dashboard extends Component {
       var totalIngredients = items.reduce(function(total, el){
         return total.concat(el);
       }, []);
-      console.log('items received', totalIngredients);
       this.setState({
         pastSearches: totalIngredients
       });
@@ -229,7 +225,6 @@ class Dashboard extends Component {
                 <search key={ingredient._id}>{ingredient.name + ' - ' + ingredient.link}<br/></search>
               )
               )}
-
             </div>
           </div>
         </div>)}

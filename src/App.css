@@ -123,28 +123,6 @@ LANDING PAGE STYLING
 }
 
 /*//////////////////
-LOGIN PAGE STYLING
-//////////////////*/
-
-.Button-parent input {
-  margin: 0 auto;
-  width: 80%;
-  max-width: 360px;
-  margin-top: .4em;
-  margin-bottom: .4em;
-  background-color: rgba(255, 255, 255, 0);
-  color: #fff;
-  font-size: 1.5em;
-  letter-spacing: 1.2px;
-  border: none;
-  border-bottom: 3px solid #fff;
-}
-
-.Button-parent input::placeholder {
-  color: #fff;
-}
-
-/*//////////////////
 DASHBOARD STYLING
 //////////////////*/
 
@@ -260,7 +238,3 @@ DASHBOARD STYLING
   margin: .7em auto;
   word-wrap: break-word;
 }
-/*.Search-render {
-  max-width: 100%;
-  color: red;
-}*/
