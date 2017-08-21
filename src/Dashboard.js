@@ -139,23 +139,23 @@ class Dashboard extends Component {
         }
         {
         isAuthenticated() && (
-        <div>
+        <div className="Dashboard-btns">
           <div>
-            <Button bsStyle="default" className="Logout-btn" onClick={this.logout}>LOG OUT</Button>
+            <button bsStyle="default" className="Logout-btn" onClick={this.logout}>LOG OUT</button>
           </div>
-          <div>
-            <h2>Search Ingredients 20/20</h2>
+          <div className="App-header">
+            <h2>Ingredients 20/20</h2>
           </div>
 
-          <form onSubmit={this.searchDb}>
-            <input type="text" value={this.state.search} placeholder="Search Database for Ingredient"
+          <form className="borders form-control" onSubmit={this.searchDb}>
+            <input className="Ingredient-input" type="text" value={this.state.search} placeholder="Search for Ingredient"
                 onChange={this.handleSearch}/>
-            <input type="submit" value="Submit"/>
+            <input className="Submit-btn" type="submit" value="Submit"/>
           </form>
 
-        <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
-          <input type='file' name='image' onChange={this.handleFile} />
-          <input type="submit" value="Submit"/>
+        <form className="borders form-control" onSubmit={this.handleSubmit} encType='multipart/form-data'>
+          <input className="custom-file-input" type='file' name='image' onChange={this.handleFile} />
+          <input className="Submit-btn" type="submit" value="Submit"/>
         </form>
           <img src={this.state.data_uri} height="200" alt=""></img>
           <div>
@@ -167,10 +167,10 @@ class Dashboard extends Component {
             }
           </div>
 
-          <div>
-            <button onClick={this.renderPastSearches}>
+          <div className="Button-parent">
+            <Button className="Saved-items" onClick={this.renderPastSearches}>
               MY SAVED ITEMS
-            </button>
+            </Button>
             <div>
               {this.state.pastSearches.map((ingredient) => (
                 <search
