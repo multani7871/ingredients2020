@@ -148,16 +148,17 @@ class Dashboard extends Component {
             <h2>Ingredients 20/20</h2>
           </div>
 
-          <form className="borders form-control" onSubmit={this.searchDb}>
+          <form className="form-control" onSubmit={this.searchDb}>
             <input className="Ingredient-input" type="text" value={this.state.search} placeholder="Search for Ingredient"
                 onChange={this.handleSearch}/>
             <input className="Submit-btn" type="submit" value="Submit"/>
           </form>
 
-        <form className="borders form-control" onSubmit={this.handleSubmit} encType='multipart/form-data'>
+        <form className="form-control" onSubmit={this.handleSubmit} encType='multipart/form-data'>
           <input className="custom-file-input" type='file' name='image' onChange={this.handleFile} />
-          <input className="Submit-btn" type="submit" value="Submit"/>
+          <input className="Submit-btn neg-margin-t" type="submit" value="Submit"/>
         </form>
+<<<<<<< HEAD
           <img src={this.state.data_uri} height="200" alt=""></img>
 
           <div>
@@ -169,6 +170,9 @@ class Dashboard extends Component {
               )}
           </div>
           
+=======
+          <img src={this.state.data_uri} className="Image-size" alt=""></img>
+>>>>>>> extra styling
           <div>
             {this.state.searchResLink ?
               <div>{this.state.searchResName + ' found in database! - '}
