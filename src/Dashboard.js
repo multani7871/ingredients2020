@@ -65,6 +65,15 @@ class Dashboard extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const _this = this;
+    _this.setState({
+      search: '',
+      searchResName: '',
+      searchResLink: '',
+      currentFlagged: [],
+      processing: false,
+      passed: '',
+      pastSearches: [],
+    })
     var data = {
       data_uri: this.state.data_uri,
       filename: this.state.filename,
@@ -92,6 +101,15 @@ class Dashboard extends Component {
   }
 
   handleFile(e) {
+    this.setState({
+      search: '',
+      searchResName: '',
+      searchResLink: '',
+      currentFlagged: [],
+      processing: false,
+      passed: '',
+      pastSearches: [],
+    })
     const reader = new FileReader();
     const file = e.target.files[0];
 
@@ -116,6 +134,16 @@ class Dashboard extends Component {
 
   searchDb(e) {
     e.preventDefault();
+    this.setState({
+      search: '',
+      searchResName: '',
+      searchResLink: '',
+      currentFlagged: [],
+      data_uri: null,
+      processing: false,
+      passed: '',
+      pastSearches: [],
+    })
     var lowerCaseSearch = this.state.search.toLowerCase();
     var username = this.state.username;
 
