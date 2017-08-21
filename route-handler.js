@@ -88,25 +88,31 @@ exports.googleCloudSearch = function(req, res) {
       console.log('this is the filtered array ', ingredientsArray);
 
       var toxicIngredients = [];
-      ingredientsArray.forEach(function(ingredient) {
-        (function (currentIngredient) {
-        Ingredient.findOne({name: currentIngredient}, 
+      const numberOfIngredients = ingredientsArray.length;
+      var counter = 0;
+      ingredientsArray.forEach(function(ingredient, index) {
+        Ingredient.findOne({name: ingredient}, 
           function(err, ingredientObj) {
+          console.log(index);
+          console.log(numberOfIngredients);
           //if there is an ingredient, return the document JSON, on the front end, we can extrapolate the name and link!
+         counter++;
           if (err) {
             // res.status(401).send(`${ingredient} not in database`);
             console.log('ERROR:' + err);
           } else if(ingredientObj) {
             console.log('THE INGREDIENT EXISTS');
-            console.log(ingredientObj)
+            console.log(ingredientObj);
             toxicIngredients.push(ingredientObj);
-          }
-        });
-      }) (ingredient);
+          } 
 
-      })
-      console.log(toxicIngredients);
-      res.json(toxicIngredients);
+          if (counter === numberOfIngredients-1){
+            console.log(toxicIngredients);
+            res.json(toxicIngredients);
+          }
+
+        }); 
+      })      
     }
   })
 }
