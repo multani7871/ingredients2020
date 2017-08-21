@@ -1,5 +1,3 @@
-var bcrypt = require('bcrypt-nodejs');
-var Promise = require('bluebird');
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
